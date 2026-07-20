@@ -21,9 +21,11 @@
   <main>
     <section class="meal-summary card">
       <div class="summary-heading">
-        <div>
+        <div class="summary-content">
           <p class="label">Current combination</p>
-          <h2 id="currentMeal">Nothing selected yet</h2>
+          <div id="currentMeal" class="meal-chips" aria-live="polite">
+            <p class="empty-meal">Nothing selected yet</p>
+          </div>
         </div>
         <button id="clearMealBtn" class="text-button">Clear</button>
       </div>
@@ -36,21 +38,8 @@
     <section>
       <div class="section-heading">
         <h2>Categories</h2>
-        <button id="addCategoryBtn" class="text-button">+ Add category</button>
       </div>
       <div id="categoryList" class="category-grid"></div>
-    </section>
-
-    <section class="utilities card">
-      <h2>Backup</h2>
-      <p>Export your categories and saved combinations so they can be restored later.</p>
-      <div class="utility-actions">
-        <button id="exportBtn" class="secondary">Export backup</button>
-        <label class="secondary file-button">
-          Import backup
-          <input id="importInput" type="file" accept="application/json">
-        </label>
-      </div>
     </section>
   </main>
 
@@ -64,10 +53,53 @@
         <button value="cancel" class="icon-button" aria-label="Close">×</button>
       </div>
       <div id="itemChoiceList" class="choice-list"></div>
-      <div class="dialog-actions split">
-        <button type="button" id="manageItemsBtn" class="secondary">Edit items</button>
+      <div class="dialog-actions">
         <button value="done" class="primary">Done</button>
       </div>
+    </form>
+  </dialog>
+
+
+  <dialog id="manageMenuDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <h2>Manage</h2>
+        <button value="cancel" class="icon-button" aria-label="Close">×</button>
+      </div>
+
+      <div class="manage-menu">
+        <button type="button" id="manageCategoriesMenuBtn" class="menu-card">
+          <strong>Categories</strong>
+          <span>Add, rename, reorder, or delete categories</span>
+        </button>
+
+        <button type="button" id="manageItemsMenuBtn" class="menu-card">
+          <strong>Items</strong>
+          <span>Add, rename, reorder, or delete items</span>
+        </button>
+
+        <div class="menu-card static">
+          <strong>Backup</strong>
+          <span>Export or restore your categories and saved combinations</span>
+          <div class="utility-actions">
+            <button type="button" id="exportBtn" class="secondary">Export backup</button>
+            <label class="secondary file-button">
+              Import backup
+              <input id="importInput" type="file" accept="application/json">
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="categoryPickerDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <h2>Choose a category</h2>
+        <button value="cancel" class="icon-button" aria-label="Close">×</button>
+      </div>
+      <div id="categoryPickerList" class="manage-menu"></div>
     </form>
   </dialog>
 

@@ -125,6 +125,8 @@ const $ = (selector) => document.querySelector(selector);
 const categoryList = $("#categoryList");
 const currentMeal = $("#currentMeal");
 const categoryDialog = $("#categoryDialog");
+const manageMenuDialog = $("#manageMenuDialog");
+const categoryPickerDialog = $("#categoryPickerDialog");
 const manageDialog = $("#manageDialog");
 const savedDialog = $("#savedDialog");
 const promptDialog = $("#promptDialog");
@@ -174,8 +176,25 @@ function fullMealText(selections = state.selections) {
 }
 
 function render() {
-  const meal = fullMealText();
-  currentMeal.textContent = meal || "Nothing selected yet";
+  const mealItems = [];
+  for (const category of state.categories) {
+    for (const item of selectedItemsFor(category)) {
+      mealItems.push(item);
+    }
+  }
+
+  currentMeal.innerHTML = "";
+  if (!mealItems.length) {
+    currentMeal.innerHTML = `<p class="empty-meal">Nothing selected yet</p>`;
+  } else {
+    mealItems.forEach(item => {
+      const chip = document.createElement("span");
+      chip.className = "meal-chip";
+      chip.textContent = item;
+      currentMeal.appendChild(chip);
+    });
+  }
+
   categoryList.innerHTML = "";
 
   state.categories.forEach(category => {
@@ -221,10 +240,6 @@ function openCategory(categoryId) {
   categoryDialog.showModal();
 }
 
-$("#manageItemsBtn").addEventListener("click", () => {
-  categoryDialog.close();
-  openManageItems(activeCategoryId);
-});
 
 function openManageCategories() {
   manageMode = "categories";
@@ -450,8 +465,44 @@ $("#clearMealBtn").addEventListener("click", () => {
   }
 });
 
-$("#manageCategoriesBtn").addEventListener("click", openManageCategories);
-$("#addCategoryBtn").addEventListener("click", openManageCategories);
+$("#manageCategoriesBtn").addEventListener("click", () => {
+  manageMenuDialog.showModal();
+});
+
+$("#manageCategoriesMenuBtn").addEventListener("click", () => {
+  manageMenuDialog.close();
+  openManageCategories();
+});
+
+$("#manageItemsMenuBtn").addEventListener("click", () => {
+  renderCategoryPicker();
+  manageMenuDialog.close();
+  categoryPickerDialog.showModal();
+});
+
+function renderCategoryPicker() {
+  const list = $("#categoryPickerList");
+  list.innerHTML = "";
+
+  if (!state.categories.length) {
+    list.innerHTML = `<p class="empty">No categories yet.</p>`;
+    return;
+  }
+
+  state.categories.forEach(category => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "menu-card";
+    button.innerHTML = `
+      <strong>${escapeHtml(category.name)}</strong>
+      <span>${category.items.length} item${category.items.length === 1 ? "" : "s"}</span>`;
+    button.addEventListener("click", () => {
+      categoryPickerDialog.close();
+      openManageItems(category.id);
+    });
+    list.appendChild(button);
+  });
+}
 
 $("#exportBtn").addEventListener("click", () => {
   const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });

@@ -1,4 +1,4 @@
-const CACHE = "meal-builder-v1";
+const CACHE = "meal-builder-v2";
 const ASSETS = [
   "./",
   "./index.html",
