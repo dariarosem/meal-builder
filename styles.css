@@ -1,0 +1,93 @@
+* { box-sizing: border-box; }
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1d2a23;
+  background: #f4f3ee;
+  font-synthesis: none;
+}
+body { margin: 0; min-height: 100vh; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.app-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1.25rem max(1rem, env(safe-area-inset-left));
+  background: #315c47; color: white; position: sticky; top: 0; z-index: 5;
+}
+.app-header h1, .app-header p { margin: 0; }
+.eyebrow { font-size: .78rem; opacity: .8; text-transform: uppercase; letter-spacing: .08em; }
+main { width: min(760px, 100%); margin: 0 auto; padding: 1rem 1rem 4rem; }
+.card {
+  background: white; border: 1px solid #deddd6; border-radius: 18px;
+  padding: 1rem; box-shadow: 0 5px 18px rgba(25, 40, 32, .06);
+}
+.meal-summary { margin-bottom: 1.5rem; }
+.summary-heading, .section-heading, .dialog-header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+}
+.label { margin: 0 0 .25rem; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: #66736c; }
+h1, h2 { line-height: 1.15; }
+h2 { margin: 0; font-size: 1.2rem; }
+#currentMeal { margin-top: .15rem; overflow-wrap: anywhere; }
+.summary-actions, .utility-actions, .dialog-actions {
+  display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap;
+}
+button, .file-button {
+  border-radius: 12px; border: 1px solid transparent; padding: .75rem 1rem; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 650;
+}
+.primary { background: #315c47; color: white; }
+.secondary { background: #eef2ef; border-color: #cbd4cf; color: #24342c; }
+.secondary.small { padding: .55rem .75rem; min-height: 38px; }
+.text-button { background: transparent; color: #315c47; padding: .35rem .25rem; min-height: auto; }
+.category-grid { display: grid; grid-template-columns: 1fr; gap: .75rem; margin-top: .75rem; }
+.category-card {
+  width: 100%; text-align: left; background: white; border: 1px solid #d8d8d0;
+  border-radius: 16px; padding: 1rem; box-shadow: 0 3px 10px rgba(25,40,32,.04);
+}
+.category-card strong { display: block; font-size: 1.05rem; margin-bottom: .3rem; }
+.category-card span { color: #66736c; overflow-wrap: anywhere; }
+.category-card .selected { color: #315c47; font-weight: 600; }
+.utilities { margin-top: 1.5rem; }
+.utilities p { color: #66736c; margin-bottom: 0; }
+.file-button input { display: none; }
+dialog {
+  border: 0; padding: 0; border-radius: 20px; width: min(92vw, 560px);
+  max-height: 88vh; background: transparent;
+}
+dialog::backdrop { background: rgba(18, 26, 22, .62); }
+.dialog-card {
+  background: white; padding: 1rem; border-radius: 20px; overflow-y: auto; max-height: 88vh;
+}
+.dialog-card.compact { max-width: 430px; margin: auto; }
+.icon-button {
+  border: 0; background: #eef2ef; width: 42px; height: 42px; border-radius: 50%;
+  padding: 0; font-size: 1.6rem; font-weight: 400;
+}
+.choice-list, .manage-list, .saved-list { display: grid; gap: .6rem; margin-top: 1rem; }
+.choice-row {
+  display: flex; align-items: center; gap: .8rem; min-height: 48px;
+  padding: .75rem; border: 1px solid #d8d8d0; border-radius: 12px;
+}
+.choice-row input { width: 22px; height: 22px; accent-color: #315c47; }
+.manage-row, .saved-row {
+  display: grid; grid-template-columns: 1fr auto; gap: .6rem; align-items: center;
+  border: 1px solid #d8d8d0; border-radius: 12px; padding: .7rem;
+}
+.manage-row .actions, .saved-row .actions { display: flex; gap: .4rem; }
+.mini {
+  min-height: 38px; padding: .45rem .65rem; border-radius: 9px; background: #eef2ef;
+  border-color: #d5ddd8; font-weight: 600;
+}
+.danger { color: #9c2f2f; }
+.full { width: 100%; margin-top: .8rem; }
+.split { justify-content: space-between; }
+.empty { color: #66736c; text-align: center; padding: 1.2rem .5rem; }
+.saved-row button.load { text-align: left; justify-content: flex-start; background: transparent; padding: 0; }
+.saved-row small { display: block; color: #66736c; margin-top: .2rem; }
+label span { display: block; margin: .8rem 0 .35rem; font-weight: 650; }
+input[type="text"] {
+  width: 100%; border: 1px solid #bfc9c3; border-radius: 10px; padding: .8rem; min-height: 46px;
+}
+@media (min-width: 620px) {
+  .category-grid { grid-template-columns: 1fr 1fr; }
+}

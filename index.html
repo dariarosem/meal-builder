@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#315c47">
+  <title>Meal Builder</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Simple meal decisions</p>
+      <h1>Meal Builder</h1>
+    </div>
+    <button id="manageCategoriesBtn" class="secondary small">Manage</button>
+  </header>
+
+  <main>
+    <section class="meal-summary card">
+      <div class="summary-heading">
+        <div>
+          <p class="label">Current combination</p>
+          <h2 id="currentMeal">Nothing selected yet</h2>
+        </div>
+        <button id="clearMealBtn" class="text-button">Clear</button>
+      </div>
+      <div class="summary-actions">
+        <button id="saveMealBtn" class="primary">Save combination</button>
+        <button id="savedMealsBtn" class="secondary">Saved combinations</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Categories</h2>
+        <button id="addCategoryBtn" class="text-button">+ Add category</button>
+      </div>
+      <div id="categoryList" class="category-grid"></div>
+    </section>
+
+    <section class="utilities card">
+      <h2>Backup</h2>
+      <p>Export your categories and saved combinations so they can be restored later.</p>
+      <div class="utility-actions">
+        <button id="exportBtn" class="secondary">Export backup</button>
+        <label class="secondary file-button">
+          Import backup
+          <input id="importInput" type="file" accept="application/json">
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="categoryDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <div>
+          <p class="label">Choose one or more</p>
+          <h2 id="categoryDialogTitle">Category</h2>
+        </div>
+        <button value="cancel" class="icon-button" aria-label="Close">×</button>
+      </div>
+      <div id="itemChoiceList" class="choice-list"></div>
+      <div class="dialog-actions split">
+        <button type="button" id="manageItemsBtn" class="secondary">Edit items</button>
+        <button value="done" class="primary">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="manageDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <h2 id="manageDialogTitle">Manage</h2>
+        <button value="cancel" class="icon-button" aria-label="Close">×</button>
+      </div>
+      <div id="manageList" class="manage-list"></div>
+      <button type="button" id="addManagedItemBtn" class="secondary full">+ Add</button>
+      <div class="dialog-actions">
+        <button value="done" class="primary">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="savedDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-header">
+        <h2>Saved combinations</h2>
+        <button value="cancel" class="icon-button" aria-label="Close">×</button>
+      </div>
+      <div id="savedMealList" class="saved-list"></div>
+      <div class="dialog-actions">
+        <button value="done" class="primary">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="promptDialog">
+    <form method="dialog" class="dialog-card compact" id="promptForm">
+      <h2 id="promptTitle">Enter a name</h2>
+      <label>
+        <span id="promptLabel">Name</span>
+        <input id="promptInput" type="text" autocomplete="off" required>
+      </label>
+      <div class="dialog-actions">
+        <button value="cancel" class="secondary">Cancel</button>
+        <button value="confirm" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
